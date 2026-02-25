@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Am I in Prod?</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <header>
+    <h1>Am I in Prod?</h1>
+    <p class="subtitle">Label your environments</p>
+  </header>
+
+  <main>
+    <!-- Site list -->
+    <section id="sites-section">
+      <ul id="sites-list"></ul>
+
+      <div id="empty-state" class="hidden">
+        <p>No sites configured yet.</p>
+        <p>Add your first site below.</p>
+      </div>
+    </section>
+
+    <!-- Add / Edit form -->
+    <section id="form-section">
+      <h2 id="form-title">Add site</h2>
+
+      <div class="field">
+        <label for="input-pattern">URL pattern</label>
+        <input id="input-pattern" type="text" placeholder="e.g. dev.myapp.com" autocomplete="off" />
+        <span class="hint">Matches if the page URL contains this string</span>
+      </div>
+
+      <div class="field">
+        <label for="input-label">Label</label>
+        <input id="input-label" type="text" placeholder="e.g. DEV" maxlength="20" autocomplete="off" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="input-color">Color</label>
+          <input id="input-color" type="color" value="#e53e3e" />
+        </div>
+
+        <div class="field">
+          <label for="input-opacity">
+            Opacity &nbsp;<span id="opacity-value">85%</span>
+          </label>
+          <input id="input-opacity" type="range" min="10" max="100" value="85" step="1" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Position</label>
+        <div class="position-grid">
+          <button class="pos-btn active" data-pos="top-left">↖ Top left</button>
+          <button class="pos-btn" data-pos="top-right">Top right ↗</button>
+          <button class="pos-btn" data-pos="bottom-left">↙ Bottom left</button>
+          <button class="pos-btn" data-pos="bottom-right">Bottom right ↘</button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button id="btn-save" class="btn-primary">Save</button>
+        <button id="btn-cancel" class="btn-ghost hidden">Cancel</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

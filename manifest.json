@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Am I in Prod?",
+  "version": "1.0.0",
+  "description": "Display environment labels (DEV, PROD, STAGING…) on websites to avoid browsing mistakes.",
+  "permissions": ["storage", "sidePanel"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Am I in Prod?"
+  }
+}
