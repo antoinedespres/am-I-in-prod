@@ -13,6 +13,14 @@
   </header>
 
   <main>
+    <!-- Toolbar -->
+    <section id="toolbar-section">
+      <label class="switch-row">
+        <input id="input-sync" type="checkbox" checked />
+        <span>Sync rules across devices</span>
+      </label>
+    </section>
+
     <!-- Site list -->
     <section id="sites-section">
       <ul id="sites-list"></ul>
@@ -21,6 +29,7 @@
         <p>No sites configured yet.</p>
         <p>Add your first site below.</p>
       </div>
+      <p class="hint hint-reorder">Drag rules with ⠿ to change match priority — the first matching rule wins.</p>
     </section>
 
     <!-- Add / Edit form -->
@@ -28,9 +37,37 @@
       <h2 id="form-title">Add site</h2>
 
       <div class="field">
-        <label for="input-pattern">URL pattern</label>
+        <div class="field-label-row">
+          <label for="input-pattern">URL pattern</label>
+          <button id="btn-use-current-tab" class="btn-link" type="button">Use current tab</button>
+        </div>
         <input id="input-pattern" type="text" placeholder="e.g. dev.myapp.com" autocomplete="off" />
-        <span class="hint">Matches if the page URL contains this string</span>
+        <span id="pattern-hint" class="hint">Matches if the hostname contains this string</span>
+        <span id="pattern-duplicate-warning" class="warning hidden">⚠ Another rule already uses this pattern</span>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="input-match-type">Match type</label>
+          <select id="input-match-type">
+            <option value="contains">Contains</option>
+            <option value="wildcard">Wildcard (*)</option>
+            <option value="regex">Regex</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="input-match-target">Match against</label>
+          <select id="input-match-target">
+            <option value="hostname">Hostname</option>
+            <option value="url">Full URL</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="input-exclude">Exclude pattern <span class="optional">(optional)</span></label>
+        <input id="input-exclude" type="text" placeholder="e.g. admin.myapp.com" autocomplete="off" />
+        <span class="hint">Skip this rule if this substring is also present</span>
       </div>
 
       <div class="field">
@@ -53,6 +90,17 @@
       </div>
 
       <div class="field">
+        <label>Color presets</label>
+        <div class="preset-row">
+          <button type="button" class="preset-swatch" data-color="#38a169" style="background:#38a169" title="Dev"></button>
+          <button type="button" class="preset-swatch" data-color="#d69e2e" style="background:#d69e2e" title="Staging"></button>
+          <button type="button" class="preset-swatch" data-color="#e53e3e" style="background:#e53e3e" title="Prod"></button>
+          <button type="button" class="preset-swatch" data-color="#9b2c2c" style="background:#9b2c2c" title="Danger"></button>
+          <button type="button" class="preset-swatch" data-color="#3182ce" style="background:#3182ce" title="Info"></button>
+        </div>
+      </div>
+
+      <div class="field">
         <label>Position</label>
         <div class="position-grid">
           <button class="pos-btn active" data-pos="top-left">↖ Top left</button>
@@ -62,9 +110,24 @@
         </div>
       </div>
 
+      <div class="field">
+        <label>Badge size</label>
+        <div class="size-grid">
+          <button class="size-btn" data-size="small">Small</button>
+          <button class="size-btn active" data-size="medium">Medium</button>
+          <button class="size-btn" data-size="large">Large</button>
+        </div>
+      </div>
+
       <div class="form-actions">
         <button id="btn-save" class="btn-primary">Save</button>
         <button id="btn-cancel" class="btn-ghost hidden">Cancel</button>
+      </div>
+
+      <div class="backup-row">
+        <button id="btn-export" class="btn-ghost btn-small">Export</button>
+        <button id="btn-import" class="btn-ghost btn-small">Import</button>
+        <input id="input-import-file" type="file" accept="application/json" class="hidden" />
       </div>
     </section>
   </main>
